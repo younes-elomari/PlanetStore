@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 // import NavBar from "./_components/NavBar";
 import { Box, Container, Theme } from "@radix-ui/themes";
 // import Footer from "./_components/Footer";
-// import QueryClientProvider from "./QueryClientProvider";
+import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <QueryClientProvider> */}
+        <QueryClientProvider>
           <Theme appearance="light" accentColor="violet">
             <main className="px-3">
               <Container>
@@ -40,7 +40,7 @@ export default function RootLayout({
               </Container>
             </main>
           </Theme>
-        {/* </QueryClientProvider> */}
+        </QueryClientProvider>
       </body>
     </html>
   );

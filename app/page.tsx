@@ -35,8 +35,8 @@ export default async function Home() {
   );
 }
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore",
-//   description:
-//     "At PlanetStore, we are committed to providing you with an unparalleled shopping experience. Our online store is designed to offer the best products on the market, ensuring that you receive the highest quality goods at the most competitive prices.",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore",
+  description:
+    "At PlanetStore, we are committed to providing you with an unparalleled shopping experience. Our online store is designed to offer the best products on the market, ensuring that you receive the highest quality goods at the most competitive prices.",
+};

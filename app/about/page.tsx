@@ -41,10 +41,10 @@ const AboutPage = () => {
   );
 };
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore - about",
-//   description:
-//     "Welcome! PlanetStore is an online store created to provide you with an exceptional shopping experience.",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore - about",
+  description:
+    "Welcome! PlanetStore is an online store created to provide you with an exceptional shopping experience.",
+};
 
 export default AboutPage;

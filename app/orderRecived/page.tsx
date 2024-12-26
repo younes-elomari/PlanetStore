@@ -37,10 +37,10 @@ const OrderRecivedPage = () => {
   );
 };
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore - orderRecived",
-//   description:
-//     "Meeting our customers needs is our top priority. We will contact you shortly to confirm your order and inform you of the delivery date.",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore - orderRecived",
+  description:
+    "Meeting our customers needs is our top priority. We will contact you shortly to confirm your order and inform you of the delivery date.",
+};
 
 export default OrderRecivedPage;

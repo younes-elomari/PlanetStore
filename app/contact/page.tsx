@@ -25,10 +25,10 @@ const ContactPage = () => {
   );
 };
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore - contact",
-//   description:
-//     "Hello, we would be very happy to hear from you. Feel free to share what's on your mind or request a product that is not currently available on our site, and we will strive to fulfill your request as soon as possible.",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore - contact",
+  description:
+    "Hello, we would be very happy to hear from you. Feel free to share what's on your mind or request a product that is not currently available on our site, and we will strive to fulfill your request as soon as possible.",
+};
 
 export default ContactPage;

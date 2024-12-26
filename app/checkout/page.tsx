@@ -11,10 +11,10 @@ const CheckoutPage = () => {
   );
 };
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore - checkout",
-//   description:
-//     "Welcome! PlanetStore is an online store created to provide you with an exceptional shopping experience.",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore - checkout",
+  description:
+    "Welcome! PlanetStore is an online store created to provide you with an exceptional shopping experience.",
+};
 
 export default CheckoutPage;

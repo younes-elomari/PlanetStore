@@ -64,8 +64,8 @@ const DasoboardPage = async () => {
   );
 };
 
-// export const metadata: Metadata = {
-//   title: "PlanetStore - dashboard",
-// };
+export const metadata: Metadata = {
+  title: "PlanetStore - dashboard",
+};
 
 export default DasoboardPage;

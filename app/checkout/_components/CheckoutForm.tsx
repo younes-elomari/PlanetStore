@@ -4,16 +4,16 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { customerSchema } from "@/app/validationSchemas";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Customer, Order } from "@prisma/client";
 import useProductsStore from "@/app/store";
 import { v4 } from "uuid";
 import _ from "lodash";
-import Spinner from "@/app/_components/Spinner";
 import { calculatePriceWithOffer } from "@/app/utils/calculatePriceWithOffer";
 import toast, { Toaster } from "react-hot-toast";
+import { customerSchema } from "@/app/validationSchemas";
+import Spinner from "@/app/_components/Spinner";
 
 type customerDataType = z.infer<typeof customerSchema>;
 

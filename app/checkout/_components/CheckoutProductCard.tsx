@@ -1,9 +1,6 @@
 import { Box, Flex, Heading, Text } from "@radix-ui/themes";
-import Image from "next/image";
-import noImage from "@/public/no-image-placeholder.webp";
 import { CartProduct } from "@/app/store";
 import { calculateTotal } from "@/app/utils/calculateTotal";
-// import { CldImage } from "next-cloudinary";
 
 interface Props {
   product: CartProduct;

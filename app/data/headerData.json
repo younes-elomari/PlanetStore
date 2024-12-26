@@ -1,0 +1,17 @@
+{
+  "primaryHeaderCard": {
+    "backgroundImage": "/mainHeaderImage.jpg",
+    "subHeading": "Find Your",
+    "heading": "Dreame Product"
+  },
+  "secondaryHeaderCard1": {
+    "backgroundImage": "/subHeaderImage1.jpg",
+    "subHeading": "New",
+    "heading": "Arrivale"
+  },
+  "secondaryHeaderCard2": {
+    "backgroundImage": "/subHeaderImage2.jpg",
+    "subHeading": "Big",
+    "heading": "Clearance"
+  }
+}

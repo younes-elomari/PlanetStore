@@ -9,6 +9,207 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id               String             @id @default(cuid())
+  name             String?
+  username         String?            @unique
+  email            String?            @unique
+  hashedPassword   String
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String  @unique
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User?   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String   @unique @db.VarChar(255)
+  slug            String   @unique @db.VarChar(255)
+  unitPrice       Decimal  @default(0) @db.Decimal(9, 2)
+  description     String   @db.Text
+  discount        Int      @default(0)
+  backgroundImage String?  @db.Text
+  iconImage       String?  @db.Text
+  deleveryChrge   Int?     @default(0)
+  orderTimes      Int      @default(0)
+  createdAt       DateTime @default(now())
+  categoryId      Int
+  category        Category @relation(fields: [categoryId], references: [id])
+
+  ColorItem Color_Item[]
+  OrderItem Order_Item[]
+}
+
+model Category {
+  id             Int     @id @default(autoincrement())
+  iconBackground String? @db.Text
+  name           String  @unique @db.VarChar(255)
+  slug           String  @db.VarChar(255)
+
+  Product Product[]
+}
+
+model Color {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  slug  String @db.VarChar(255)
+  color String @db.VarChar(50)
+
+  ColorItem Color_Item[]
+}
+
+model Color_Item {
+  id Int @id @default(autoincrement())
+
+  colorId   Int
+  Color     Color   @relation(fields: [colorId], references: [id])
+  productId Int
+  Product   Product @relation(fields: [productId], references: [id])
+}
+
+model Customer {
+  id       Int     @id @default(autoincrement())
+  fullName String  @db.VarChar(255)
+  email    String? @unique
+  phone    String  @unique @db.VarChar(255)
+  city     String  @db.VarChar(255)
+  address  String  @db.Text
+  country  String  @default("Morocco") @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+
+  order   Order[]
+  invoice Invoice[]
+  Payment Payment[]
+}
+
+model Order {
+  id          Int           @id @default(autoincrement())
+  orderDate   DateTime      @default(now())
+  shippedDate DateTime?
+  orderStatus Order_Statuse @default(Processed)
+
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  OrderItem Order_Item[]
+  Invoice   Invoice[]
+}
+
+enum Order_Statuse {
+  Processed
+  Shipped
+  Delivered
+}
+
+model Order_Item {
+  id        Int      @id @default(autoincrement())
+  orderDate DateTime @default(now())
+
+  orderId Int
+  Order   Order @relation(fields: [orderId], references: [id])
+
+  productId Int
+  Product   Product @relation(fields: [productId], references: [id])
+
+  quantity  Int     @db.SmallInt
+  unitPrice Decimal @default(0) @db.Decimal(9, 2)
+}
+
+model Invoice {
+  id           Int       @id @default(autoincrement())
+  number       String    @db.VarChar(255)
+  invoiceTotal Decimal   @default(0) @db.Decimal(9, 2)
+  invoiceDate  DateTime  @default(now())
+  dueDate      DateTime?
+  paymentTotal Decimal   @default(0) @db.Decimal(9, 2)
+  paymentDate  DateTime?
+
+  orderId Int   @unique
+  order   Order @relation(fields: [orderId], references: [id])
+
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  Payment Payment[]
+}
+
+model Payment {
+  id     Int      @id @default(autoincrement())
+  date   DateTime @default(now())
+  amount Decimal  @default(0) @db.Decimal(9, 2)
+
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  invoiceId Int
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+
+  paymentMethod Payment_Method @default(Cash)
+}
+
+enum Payment_Method {
+  Cash
+  Banque
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  fullName  String?  @db.VarChar(255)
+  email     String?
+  phone     String?  @db.VarChar(255)
+  message   String   @db.Text
+  createdAt DateTime @default(now())
 }
